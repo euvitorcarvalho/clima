@@ -82,6 +82,11 @@ header {
   z-index: 10001;
 }
 
+#menu-icon:hover {
+  color: #d3d3d3;
+  transform: translateY(0.1rem);
+}
+
 @media (max-width: 1322px) {
   header {
     padding: 1.4rem 2%;

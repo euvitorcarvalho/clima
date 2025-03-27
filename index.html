@@ -51,25 +51,30 @@
           <input type="text" placeholder="Search here" id="searchInput" />
         </div>
         <div class="filter_bar">
-          <span class="filter_text">Filters</span>
-          <select id="temperatureFilter">
-            <option value="">Temperature</option>
-            <option value="hot">Hot</option>
-            <option value="mild">Mild</option>
-            <option value="cold">Cold</option>
-          </select>
-          <select id="windFilter">
-            <option value="">Wind Speed</option>
-            <option value="hot">Low</option>
-            <option value="mild">Medium</option>
-            <option value="cold">High</option>
-          </select>
-          <select id="conditionFilter">
-            <option value="">Condition</option>
-            <option value="sunny">Sunny</option>
-            <option value="cloudy">Cloudy</option>
-            <option value="rainy">Rainy</option>
-          </select>
+          <div class="filter-text-container">
+            <span class="filter_text">Filters</span>
+            <div class="bx bx-chevron-down" id="filters-icon"></div>
+          </div>
+          <div class="filters">
+            <select id="temperatureFilter">
+              <option value="">Temperature</option>
+              <option value="hot">Hot</option>
+              <option value="mild">Mild</option>
+              <option value="cold">Cold</option>
+            </select>
+            <select id="windFilter">
+              <option value="">Wind Speed</option>
+              <option value="hot">Low</option>
+              <option value="mild">Medium</option>
+              <option value="cold">High</option>
+            </select>
+            <select id="conditionFilter">
+              <option value="">Condition</option>
+              <option value="sunny">Sunny</option>
+              <option value="cloudy">Cloudy</option>
+              <option value="rainy">Rainy</option>
+            </select>
+          </div>
         </div>
       </div>
       <section class="weather_cards" id="weatherCards"></section>
@@ -85,4 +90,5 @@
   ></script>
   <script type="module" src="./src/js/main.js"></script>
   <script type="module" src="./src/js/navbar.js"></script>
+  <script type="module" src="./src/js/filterbar.js"></script>
 </html>
