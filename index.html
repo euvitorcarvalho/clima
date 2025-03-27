@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/search-filter.css" />
+    <link rel="stylesheet" href="./src/css/intro.css" />
+    <link rel="stylesheet" href="./src/css/navbar.css" />
+    <link rel="stylesheet" href="./src/css/base.css" />
+    <link rel="stylesheet" href="./src/css/weather-cards.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+    <title>Página de Clima</title>
+  </head>
+  <body>
+    <header>
+      <a href="#" class="nav_logo"
+        ><ion-icon name="sunny-outline"></ion-icon><span>Clima</span></a
+      >
+
+      <ul class="navbar">
+        <li>
+          <a href="#"><span>Home</span></a>
+        </li>
+        <li><a href="#">Download</a></li>
+        <li><a href="#">Contact</a></li>
+        <div class="btn_container">
+          <button class="nav_btn2">Sign In</button>
+        </div>
+      </ul>
+
+      <div class="nav_actions">
+        <button class="nav_btn">Sign In</button>
+        <div class="bx bx-menu" id="menu-icon"></div>
+      </div>
+    </header>
+    <div class="intro">
+      <p>Seeing the weather of the whole world with <span>Clima!</span></p>
+    </div>
+    <main>
+      <div class="search_filter">
+        <div class="search_bar">
+          <input type="text" placeholder="Search here" id="searchInput" />
+        </div>
+        <div class="filter_bar">
+          <span class="filter_text">Filters</span>
+          <select id="temperatureFilter">
+            <option value="">Temperature</option>
+            <option value="hot">Hot</option>
+            <option value="mild">Mild</option>
+            <option value="cold">Cold</option>
+          </select>
+          <select id="windFilter">
+            <option value="">Wind Speed</option>
+            <option value="hot">Low</option>
+            <option value="mild">Medium</option>
+            <option value="cold">High</option>
+          </select>
+          <select id="conditionFilter">
+            <option value="">Condition</option>
+            <option value="sunny">Sunny</option>
+            <option value="cloudy">Cloudy</option>
+            <option value="rainy">Rainy</option>
+          </select>
+        </div>
+      </div>
+      <section class="weather_cards" id="weatherCards"></section>
+    </main>
+  </body>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+  ></script>
+  <script type="module" src="./src/js/main.js"></script>
+  <script type="module" src="./src/js/navbar.js"></script>
+</html>

@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%vh;
+}
+
+body {
+  height: 100%vh;
+  background: #1b282e url(../../assets/background.svg) no-repeat center/cover;
+  color: #fff;
+}
+
+main {
+  padding: 0 12%;
+}
+
+@media (max-width: 1322px) {
+  body {
+    min-height: 100vh;
+    background: #1b282e url(../../assets/background2.png) no-repeat center/cover;
+  }
+}
+
+
