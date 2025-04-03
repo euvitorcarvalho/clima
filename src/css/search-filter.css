@@ -41,7 +41,7 @@
   flex: 2;
   display: flex;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: 1.2rem 1.7rem;
   gap: 2rem;
   justify-content: space-between;
   background: #24343d;
@@ -98,7 +98,7 @@
   }
 
   .filter-text-container {
-    padding: 1rem;
+    padding: 0.2rem 1rem;
     display: flex;
     width: 100%;
     align-items: center;
@@ -110,10 +110,12 @@
     flex-direction: column;
   }
   .filter_bar {
+    padding: 0;
     justify-content: space-between;
     flex-direction: column;
     width: 100%;
     gap: 1.2rem;
+    max-width: 30rem;
   }
   .filter_bar select {
     text-align: center;
