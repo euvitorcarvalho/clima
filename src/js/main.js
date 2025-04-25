@@ -17,3 +17,15 @@ const weatherConditions = {
   fog: "foggy",
 };
 
+async function fetchWeatherData(cityName) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}?q=${cityName}&appid=${API_KEY}&units=metric&lang=pt_br`
+    );
+    if (!response.ok) throw new Error('Cidade não encontrada')
+      return await response.json();
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error);
+    return null;
+  }
+}
