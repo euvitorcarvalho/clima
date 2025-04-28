@@ -1,8 +1,8 @@
 .intro {
   display: flex;
   justify-content: center;
-  margin-top: 21.6rem;
-  margin-bottom: 6rem;
+  margin-top: 14rem;
+  margin-bottom: 2rem;
   width: 100%;
   transition: all 0.5s ease;
 }
@@ -22,28 +22,17 @@
 }
 
 @media (max-width: 1322px) {
-
-  .intro {
-    margin-top: 18.9rem;
-  }
-
   .intro p {
     padding: 0 5%;
   }
 }
 
 @media (max-width: 1090px) {
-  .intro {
-    margin-top: 12rem;
-    margin-bottom: 4.5rem;
-  }
+
 }
 
 @media (max-width: 850px) {
-  .intro {
-    margin-top: 10rem;
-    margin-bottom: 3.5rem;
-  }
+    
   .intro p {
     font-size: 3rem;
   }

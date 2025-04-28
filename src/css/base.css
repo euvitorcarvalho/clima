@@ -20,12 +20,20 @@ body {
 
 main {
   padding: 0 12%;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 1322px) {
   body {
     min-height: 100vh;
     background: #1b282e url(../../assets/background2.png) no-repeat center/cover;
+  }
+}
+
+@media (max-width: 850px) {
+  main {
+    align-items: center;
   }
 }
 

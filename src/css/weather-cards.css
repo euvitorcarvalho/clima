@@ -1,3 +1,10 @@
 .weather_cards {
-    display: grid;
+  margin-top: 2.1rem;
+  display: grid;
+}
+
+.weather-card {
+    background-color: #24353E;
+    width: 35.8rem;
+    height: 54.7rem;
 }
