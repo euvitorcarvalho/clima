@@ -1,10 +1,65 @@
 .weather_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
   margin-top: 2.1rem;
-  display: grid;
 }
 
 .weather-card {
-    background-color: #24353E;
-    width: 35.8rem;
-    height: 54.7rem;
+  background-color: #24353e;
+  border-radius: 2rem;
+  width: auto;
+  padding: 3rem 5.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-icon img {
+  width: auto;
+  height: 10.2rem;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weather-info p {
+  margin: 1.5rem 0;
+  font-size: 1.8rem;
+}
+
+.city-name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 4rem;
+}
+
+.weather-temp {
+  font-weight: 300;
+}
+
+@media (max-width: 850px) {
+  .weather-card {
+    width: 100%;
+  }
+}
+
+@media (max-height: 788px) {
+  .weather-card {
+    height: 98%;
+  }
+  .weather-info p {
+    margin: 1rem 0;
+    font-size: 1.6rem;
+  }
+  .city-name {
+    display: flex;
+    gap: 1rem;
+    font-size: 3rem;
+  }
 }
