@@ -5,19 +5,18 @@ const searchInput = document.getElementById("searchInput");
 const weatherCards = document.getElementById("weatherCards");
 
 const weatherConditions = {
-  clear: "sunny",
-  clouds: "cloudy",
-  rain: "rainy",
-  drizzle: "rainy",
-  thunderstorm: "rainy",
-  snow: "snowy",
-  mist: "foggy",
-  smoke: "foggy",
-  haze: "foggy",
-  fog: "foggy",
+  clear: { type: "sunny", img: "sunny.png" },
+  clouds: { type: "cloudy", img: "cloudy.png" },
+  rain: { type: "rainy", img: "rainy.png" },
+  drizzle: { type: "rainy", img: "rainy.png" },
+  thunderstorm: { type: "rainy", img: "rainy.png" },
+  snow: { type: "rainy", img: "rainy.png" },
+  mist: { type: "cloudy", img: "cloudy.png" },
+  smoke: { type: "cloudy", img: "cloudy.png" },
+  haze: { type: "cloudy", img: "cloudy.png" },
+  fog: { type: "cloudy", img: "cloudy.png" },
 };
 
-// função para buscar dados do clima
 async function fetchWeatherData(cityName) {
   try {
     const response = await fetch(
@@ -31,7 +30,6 @@ async function fetchWeatherData(cityName) {
   }
 }
 
-// função para criar cartão de clima
 function createWeatherCard(weatherData) {
   const weatherId = weatherData.weather[0].main.toLowerCase();
   const condition = weatherConditions[weatherId] || "unknown";
@@ -46,5 +44,5 @@ function createWeatherCard(weatherData) {
   <h2 class="city-name">${weatherData.name}, ${weatherData.sys.country}</h2>
     <div class="weather-info">
     
-  `
+  `;
 }
