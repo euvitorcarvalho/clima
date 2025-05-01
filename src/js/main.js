@@ -48,6 +48,22 @@ function createWeatherCard(weatherData) {
   card.dataset.wind = Math.round(weatherData.wind.speed);
 
   card.innerHTML = `
-  
+    <div class="weather-icon">
+      <img class="weather-img" src="./assets/${condition.img}" alt="condition">
+    </div>
+    <div class="weather-info">
+      <h2 class="city-name">${
+        weatherData.name
+      }<span class="weather-temp">${Math.round(
+    weatherData.main.temp
+  )}°C</span></h2>
+      <p class="weather-wind"> Vento: ${Math.round(
+        weatherData.wind.speed
+      )} km/h</p>
+      <p class="weather-time">${localTimeString}</p>
+      <p class="weather-condition">${weatherData.weather[0].description}</p>
+    </div>
   `;
+
+  return card;
 }
