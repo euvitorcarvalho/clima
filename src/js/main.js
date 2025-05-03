@@ -78,7 +78,7 @@ async function searchWeather() {
   try {
     const data = await fetchWeatherData(cityName);
     if (data) {
-      weatherCards.innerHTML = '';
+      weatherCards.innerHTML = "";
       const card = createWeatherCard(data);
       weatherCards.appendChild(card);
     }
@@ -86,3 +86,5 @@ async function searchWeather() {
     console.error(error);
   }
 }
+
+searchInput.addEventListener("input", debounce(searchWeather, 500));
