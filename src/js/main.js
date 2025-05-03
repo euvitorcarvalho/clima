@@ -67,3 +67,22 @@ function createWeatherCard(weatherData) {
 
   return card;
 }
+
+async function searchWeather() {
+  const cityName = searchInput.value.trim();
+  if (cityName.length < 3) {
+    weatherCards.innerHTML = "";
+    return;
+  }
+
+  try {
+    const data = await fetchWeatherData(cityName);
+    if (data) {
+      weatherCards.innerHTML = '';
+      const card = createWeatherCard(data);
+      weatherCards.appendChild(card);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
