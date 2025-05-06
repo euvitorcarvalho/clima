@@ -70,20 +70,28 @@ function createWeatherCard(weatherData) {
 
 async function searchWeather() {
   const cityName = searchInput.value.trim();
+
   if (cityName.length < 3) {
     weatherCards.innerHTML = "";
     return;
   }
 
   try {
+    weatherCards.innerHTML = '<div class="loading-spinner"></div>';
     const data = await fetchWeatherData(cityName);
-    if (data) {
-      weatherCards.innerHTML = "";
-      const card = createWeatherCard(data);
-      weatherCards.appendChild(card);
+
+    if (!data) {
+      weatherCards.innerHTML =
+        '<p class="error-message">Cidade não encontrada</p>';
+      return;
     }
+
+    weatherCards.innerHTML = "";
+    const card = createWeatherCard(data);
+    weatherCards.appendChild(card);
   } catch (error) {
-    console.error(error);
+    console.error("Erro na busca:", error);
+    weatherCards.innerHTML = `<p class="error-message">Erro ao buscar dados: ${error.message}</p>`;
   }
 }
 
