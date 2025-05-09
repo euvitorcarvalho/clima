@@ -67,6 +67,16 @@ function createWeatherCard(weatherData) {
     </div>
   `;
 
+  const closeBtn = document.createElement("span");
+  closeBtn.innerHTML = "x";
+  closeBtn.className = "close-btn";
+  closeBtn.onclick = () => {
+    searchedCities = searchedCities.filter((city) => city !== weatherData.name);
+    renderWeatherCards();
+  };
+
+  card.appendChild(closeBtn);
+
   return card;
 }
 
