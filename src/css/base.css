@@ -24,18 +24,6 @@ main {
   flex-direction: column;
 }
 
-.search-message,
-.error-message {
-  font-size: 2rem;
-  text-align: center;
-  margin-top: 2rem;
-  color: #cccccc;
-}
-
-.error-message {
-  color: #ff6b6b;
-}
-
 .loading-spinner {
   border: 5px solid #f3f3f3;
   border-top: 5px solid #3498db;
@@ -53,6 +41,23 @@ main {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.search-message {
+  font-size: 2rem;
+  text-align: center;
+  color: #a0a0a0;
+  margin-top: 3rem;
+}
+
+.error-message {
+  font-size: 2rem;
+  text-align: center;
+  color: #ff6b6b;
+  margin-top: 3rem;
+  padding: 1rem;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 @media (max-width: 1322px) {
