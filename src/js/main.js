@@ -4,6 +4,8 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const searchInput = document.getElementById("searchInput");
 const weatherCards = document.getElementById("weatherCards");
 
+let searchedCities = [];
+
 const weatherConditions = {
   clear: { type: "sunny", img: "sunny.png" },
   clouds: { type: "cloudy", img: "cloudy.png" },
@@ -70,9 +72,7 @@ function createWeatherCard(weatherData) {
 
 async function searchWeather() {
   const cityName = searchInput.value.trim();
-
-  if (cityName.length < 3) {
-    weatherCards.innerHTML = "";
+  if (cityName.length < 3 || searchedCities.includes(cityName)) {
     return;
   }
 
@@ -86,9 +86,8 @@ async function searchWeather() {
       return;
     }
 
-    weatherCards.innerHTML = "";
-    const card = createWeatherCard(data);
-    weatherCards.appendChild(card);
+    searchedCities.push(cityName);
+    await renderWeatherCards();
   } catch (error) {
     console.error("Erro na busca:", error);
     weatherCards.innerHTML = `<p class="error-message">Erro ao buscar dados: ${error.message}</p>`;
@@ -96,6 +95,13 @@ async function searchWeather() {
 }
 
 searchInput.addEventListener("input", debounce(searchWeather, 500));
+document
+  .getElementById("temperatureFilter")
+  .addEventListener("change", filterCards);
+document.getElementById("windFilter").addEventListener("change", filterCards);
+document
+  .getElementById("conditionFilter")
+  .addEventListener("change", filterCards);
 
 function debounce(func, wait) {
   let timeout;
