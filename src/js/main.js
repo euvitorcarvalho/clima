@@ -104,6 +104,40 @@ async function searchWeather() {
   }
 }
 
+async function renderWeatherCards() {
+  if (searchedCities.length === 0) {
+    weatherCards.innerHTML =
+      "<p class='search-message'>Busque uma cidade para come~çar</p>";
+    return;
+  }
+
+  try {
+    weatherCards.innerHTML = '<div class="loading-spinner"></div>';
+    let hasError = false;
+
+    weatherCards.innerHTML = "";
+
+    for (const city of searchedCities) {
+      const data = await fetchWeatherData(city);
+      if (data) {
+        const card = createWeatherCard(data);
+        weatherCards.appendChild(card);
+      } else {
+        hasError = true;
+      }
+    }
+
+    if (hasError) {
+      const errorElement = document.createElement("p");
+      errorElement.className = "error-message";
+      errorElement.textContent = "Algumas cidades não puderam ser carregadas";
+      weatherCards.appendChild(errorElement);
+    }
+  } catch (error) {
+    weatherCards.innerHTML = `<p class="error-message">Erro ao renderizar cartões: ${error.message}</p>`;
+  }
+}
+
 searchInput.addEventListener("input", debounce(searchWeather, 500));
 document
   .getElementById("temperatureFilter")
