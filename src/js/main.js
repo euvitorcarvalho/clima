@@ -1,10 +1,12 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+const GEOCODING_URL = "https://api.openweathermap.org/geo/1.0/direct";
 
 const searchInput = document.getElementById("searchInput");
 const weatherCards = document.getElementById("weatherCards");
-
-let searchedCities = [];
+const temperatureFilter = document.getElementById("temperatureFilter");
+const windFilter = document.getElementById("windFilter");
+const conditionFilter = document.getElementById("conditionFilter");
 
 const weatherConditions = {
   clear: { type: "sunny", img: "sunny.png" },
@@ -46,8 +48,8 @@ function createWeatherCard(weatherData) {
   const card = document.createElement("div");
   card.className = "weather-card";
   card.dataset.temp = Math.round(weatherData.main.temp);
-  card.dataset.condition = condition.type;
   card.dataset.wind = Math.round(weatherData.wind.speed);
+  card.dataset.condition = condition.type;
 
   card.innerHTML = `
     <div class="weather-icon">
@@ -107,7 +109,7 @@ async function searchWeather() {
 async function renderWeatherCards() {
   if (searchedCities.length === 0) {
     weatherCards.innerHTML =
-      "<p class='search-message'>Busque uma cidade para come~çar</p>";
+      "<p class='search-message'>Busque uma cidade para começar</p>";
     return;
   }
 
@@ -137,15 +139,6 @@ async function renderWeatherCards() {
     weatherCards.innerHTML = `<p class="error-message">Erro ao renderizar cartões: ${error.message}</p>`;
   }
 }
-
-searchInput.addEventListener("input", debounce(searchWeather, 500));
-document
-  .getElementById("temperatureFilter")
-  .addEventListener("change", filterCards);
-document.getElementById("windFilter").addEventListener("change", filterCards);
-document
-  .getElementById("conditionFilter")
-  .addEventListener("change", filterCards);
 
 function debounce(func, wait) {
   let timeout;
