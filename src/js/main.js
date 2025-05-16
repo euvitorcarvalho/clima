@@ -65,7 +65,6 @@ async function dynamicSearch(query) {
     }
 
     applyFilters(); // aplica filtros
-    
   } catch (error) {
     weatherCards.innerHTML = `<p class=error-message>Erro na busca: ${error.message}</p>`;
   } finally {
@@ -73,7 +72,7 @@ async function dynamicSearch(query) {
   }
 }
 
-async function fetchWeatherData(cityName) {
+async function fetchWeatherData(city) {
   try {
     const response = await fetch(
       `${BASE_URL}?q=${cityName}&appid=${API_KEY}&units=metric&lang=pt_br`
@@ -84,6 +83,21 @@ async function fetchWeatherData(cityName) {
     console.error("Erro ao buscar dados:", error);
     return null;
   }
+}
+
+// filtra cidades únicas
+function filterUniqueCities(cities) {
+  const unique = [];
+  const seen = new Set();
+
+  for (const city of cities) {
+    const key = `${city.name.toLowerCase()}_${city.country.toLowerCase()}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      unique.push(city);
+    }
+  }
+  return unique.slice(0, 5); // retorna no máximo 5 cidades
 }
 
 function createWeatherCard(weatherData) {
