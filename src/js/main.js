@@ -28,6 +28,37 @@ const weatherConditions = {
   fog: { type: "cloudy", img: "cloudy.png" },
 };
 
+async function fetchWeatherData(city) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}?q=${cityName}&appid=${API_KEY}&units=metric&lang=pt_br`
+    );
+    if (!response.ok) throw new Error("Cidade não encontrada");
+    return await response.json();
+  } catch (error) {
+    console.error("Erro ao buscar dados:", error);
+    return null;
+  }
+}
+
+// filtra cidades únicas criando keys
+function filterUniqueCities(cities) {
+  const unique = [];
+  const seen = new Set();
+
+  for (const city of cities) {
+    const key = `${city.name.toLowerCase()}_${city.country.toLowerCase()}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      unique.push(city);
+    }
+  }
+
+  return (
+    unique.sort((a, b) => (a.country === "BR" ? -1 : 1)), unique.slice(0, 5)
+  );
+}
+
 // função de busca dinâmica
 async function dynamicSearch(query) {
   if (query.length < 3) {
@@ -70,35 +101,6 @@ async function dynamicSearch(query) {
   } finally {
     weatherCards.classList.remove("loading");
   }
-}
-
-async function fetchWeatherData(city) {
-  try {
-    const response = await fetch(
-      `${BASE_URL}?q=${cityName}&appid=${API_KEY}&units=metric&lang=pt_br`
-    );
-    if (!response.ok) throw new Error("Cidade não encontrada");
-    return await response.json();
-  } catch (error) {
-    console.error("Erro ao buscar dados:", error);
-    return null;
-  }
-}
-
-// filtra cidades únicas criando keys
-function filterUniqueCities(cities) {
-  const unique = [];
-  const seen = new Set();
-
-  for (const city of cities) {
-    const key = `${city.name.toLowerCase()}_${city.country.toLowerCase()}`;
-    if (!seen.has(key)) {
-      seen.add(key);
-      unique.push(city);
-    }
-  }
-  
-  return unique.sort((a, b) => a.country === "BR" ? -1 : 1), unique.slice(0, 5);
 }
 
 function createWeatherCard(weatherData) {
