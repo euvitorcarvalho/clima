@@ -85,7 +85,7 @@ async function fetchWeatherData(city) {
   }
 }
 
-// filtra cidades únicas
+// filtra cidades únicas criando keys
 function filterUniqueCities(cities) {
   const unique = [];
   const seen = new Set();
@@ -97,7 +97,8 @@ function filterUniqueCities(cities) {
       unique.push(city);
     }
   }
-  return unique.slice(0, 5); // retorna no máximo 5 cidades
+  
+  return unique.sort((a, b) => a.country === "BR" ? -1 : 1), unique.slice(0, 5);
 }
 
 function createWeatherCard(weatherData) {
