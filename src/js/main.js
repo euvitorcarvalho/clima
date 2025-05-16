@@ -103,7 +103,7 @@ function filterUniqueCities(cities) {
   );
 }
 
-function createWeatherCard(weatherData) {
+function createWeatherCard(data, searchTerm = "") {
   const weatherId = weatherData.weather[0].main.toLowerCase();
   const condition = weatherConditions[weatherId] || {
     type: "unknown",
@@ -113,6 +113,11 @@ function createWeatherCard(weatherData) {
   const localTime = new Date((weatherData.dt + weatherData.timezone) * 1000);
   const options = { weekday: "long", hour: "2-digit", minute: "2-digit" };
   const localTimeString = localTime.toLocaleDateString("pt-BR", options);
+
+  const highlightedName = data.name.replace(
+    new RegExp(searchTerm, "gi"),
+    (match) => `<span class="highlight">${match}</span>`
+  );
 
   const card = document.createElement("div");
   card.className = "weather-card";
@@ -125,28 +130,14 @@ function createWeatherCard(weatherData) {
       <img class="weather-img" src="./assets/${condition.img}" alt="condition">
     </div>
     <div class="weather-info">
-      <h2 class="city-name">${
-        weatherData.name
-      }<span class="weather-temp">${Math.round(
-    weatherData.main.temp
-  )}°C</span></h2>
-      <p class="weather-wind"> Vento: ${Math.round(
-        weatherData.wind.speed
-      )} km/h</p>
+      <h2 class="city-name">${highlightedName}, ${
+    data.sys.country
+  }<span class="weather-temp">${Math.round(data.main.temp)}°C</span></h2>
+      <p class="weather-wind"> Vento: ${Math.round(data.wind.speed)} km/h</p>
       <p class="weather-time">${localTimeString}</p>
-      <p class="weather-condition">${weatherData.weather[0].description}</p>
+      <p class="weather-condition">${data.weather[0].description}</p>
     </div>
   `;
-
-  const closeBtn = document.createElement("span");
-  closeBtn.innerHTML = "x";
-  closeBtn.className = "close-btn";
-  closeBtn.onclick = () => {
-    searchedCities = searchedCities.filter((city) => city !== weatherData.name);
-    renderWeatherCards();
-  };
-
-  card.appendChild(closeBtn);
 
   return card;
 }
