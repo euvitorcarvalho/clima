@@ -1,13 +1,20 @@
+// configurações
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const GEOCODING_URL = "https://api.openweathermap.org/geo/1.0/direct";
 
+// elementos DOM
 const searchInput = document.getElementById("searchInput");
 const weatherCards = document.getElementById("weatherCards");
 const temperatureFilter = document.getElementById("temperatureFilter");
 const windFilter = document.getElementById("windFilter");
 const conditionFilter = document.getElementById("conditionFilter");
 
+// estado da aplicação
+let currentSearchTerm = "";
+let citiesData = [];
+
+// mapeamento de condições climáticas
 const weatherConditions = {
   clear: { type: "sunny", img: "sunny.png" },
   clouds: { type: "cloudy", img: "cloudy.png" },
@@ -20,6 +27,51 @@ const weatherConditions = {
   haze: { type: "cloudy", img: "cloudy.png" },
   fog: { type: "cloudy", img: "cloudy.png" },
 };
+
+// função de busca dinâmica
+async function dynamicSearch(query) {
+  if (query.length < 3) {
+    weatherCards.innerHTML = "";
+    return;
+  }
+
+  currentSearchTerm = query;
+  weatherCards.classList.add("loading");
+
+  try {
+    // busca cidades correspondentes
+    const geoData = await fetch(
+      `${GEOCODING_URL}?q=${query}&limit=5&appid=${API_KEY}`
+    );
+
+    citiesData = filterUniqueCities(geoData);
+
+    weatherCards.innerHTML = "";
+
+    if (citiesData.length === 0) {
+      weatherCards.innerHTML = `<p class="error-message">Nenhuma cidade encontrada</p>`;
+      return;
+    }
+
+    // gera cartões para cada cidade
+    for (const city of citiesData) {
+      const weatherData = await fetchWeatherData(
+        `${city.name}, ${city.country}`
+      );
+      if (weatherData) {
+        const card = createWeatherCard(weatherData, query);
+        weatherCards.appendChild(card);
+      }
+    }
+
+    applyFilters(); // aplica filtros
+    
+  } catch (error) {
+    weatherCards.innerHTML = `<p class=error-message>Erro na busca: ${error.message}</p>`;
+  } finally {
+    weatherCards.classList.remove("loading");
+  }
+}
 
 async function fetchWeatherData(cityName) {
   try {
