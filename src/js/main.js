@@ -180,3 +180,19 @@ function debounce(func, wait) {
     timeout = setTimeout(() => func.apply(context, args), wait);
   };
 }
+
+searchInput.addEventListener(
+  "input",
+  debounce((e) => {
+    const query = e.target.value.trim();
+    if (query === currentSearchTerm) return;
+    dynamicSearch(query);
+  }, 500)
+);
+
+temperatureFilter.addEventListener("change", applyFilters);
+windFilter.addEventListener("change", applyFilters);
+conditionFilter.addEventListener("change", applyFilters);
+
+weatherCards.innerHTML =
+  "<p class='search-message'>Busque uma cidade para começar</p>";
