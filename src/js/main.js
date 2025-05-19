@@ -40,12 +40,19 @@ async function dynamicSearch(query) {
 
   try {
     // busca cidades correspondentes
-    const geoData = await fetch(
+    const response = await fetch(
       `${GEOCODING_URL}?q=${query}&limit=5&appid=${API_KEY}`
     );
 
-    citiesData = filterUniqueCities(geoData);
+    if (!response.ok) throw new Error("Erro na API");
 
+    const geoData = await response.json();
+
+    if (!Array.isArray(geoData)) {
+      throw new Error("Dados inválidos na API");
+    }
+
+    citiesData = filterUniqueCities(geoData);
     weatherCards.innerHTML = "";
 
     if (citiesData.length === 0) {
@@ -66,7 +73,12 @@ async function dynamicSearch(query) {
 
     applyFilters(); // aplica filtros
   } catch (error) {
-    weatherCards.innerHTML = `<p class=error-message>Erro na busca: ${error.message}</p>`;
+    console.error("Erro na busca:", error);
+    weatherCards.innerHTML = `<p class="error-message">${
+      error.message === "Dados inválidos na API"
+        ? "Erro na API"
+        : "Erro ao buscar cidades"
+    }</p>`;
   } finally {
     weatherCards.classList.remove("loading");
   }
@@ -87,6 +99,8 @@ async function fetchWeatherData(city) {
 
 // filtra cidades únicas criando keys
 function filterUniqueCities(cities) {
+  if (!Array.isArray(cities)) return [];
+
   const unique = [];
   const seen = new Set();
 
