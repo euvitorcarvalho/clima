@@ -7,6 +7,11 @@
   margin-top: 2.1rem;
 }
 
+.flag {
+  height: 2rem;
+  width: auto;
+}
+
 .weather-card {
   background-color: #24353e;
   border-radius: 2rem;
@@ -34,6 +39,7 @@
 
 .city-name {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
   font-size: 4rem;

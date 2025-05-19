@@ -87,7 +87,7 @@ async function dynamicSearch(query) {
 async function fetchWeatherData(city) {
   try {
     const response = await fetch(
-      `${BASE_URL}?q=${cityName}&appid=${API_KEY}&units=metric&lang=pt_br`
+      `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric&lang=pt_br`
     );
     if (!response.ok) throw new Error("Cidade não encontrada");
     return await response.json();
@@ -118,7 +118,7 @@ function filterUniqueCities(cities) {
 }
 
 function createWeatherCard(data, searchTerm = "") {
-  const weatherId = weatherData.weather[0].main.toLowerCase();
+  const weatherId = data.weather[0].main.toLowerCase();
   const condition = weatherConditions[weatherId] || {
     type: "unknown",
     img: "cloudy.png",
@@ -144,9 +144,12 @@ function createWeatherCard(data, searchTerm = "") {
       <img class="weather-img" src="./assets/${condition.img}" alt="condition">
     </div>
     <div class="weather-info">
-      <h2 class="city-name">${highlightedName}, ${
-    data.sys.country
-  }<span class="weather-temp">${Math.round(data.main.temp)}°C</span></h2>
+      <h2 class="city-name">
+      <img class="flag"
+        src="https://flagcdn.com/${data.sys.country.toLowerCase()}.svg"
+        alt="${data.sys.country}"> 
+      ${highlightedName}
+      <span class="weather-temp">${Math.round(data.main.temp)}°C</span></h2>
       <p class="weather-wind"> Vento: ${Math.round(data.wind.speed)} km/h</p>
       <p class="weather-time">${localTimeString}</p>
       <p class="weather-condition">${data.weather[0].description}</p>
@@ -174,9 +177,9 @@ function applyFilters() {
 
     const windMatch =
       !windValue ||
-      (windValue === "hot" && wind > 10) ||
-      (windValue === "mild" && wind >= 10 && wind <= 20) ||
-      (windValue === "cold" && wind < 20);
+      (windValue === "low" && wind > 10) ||
+      (windValue === "medium" && wind >= 10 && wind <= 20) ||
+      (windValue === "high" && wind < 20);
 
     const conditionMatch = !conditionValue || condition === conditionValue;
 
