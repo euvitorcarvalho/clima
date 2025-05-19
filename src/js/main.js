@@ -110,7 +110,7 @@ function createWeatherCard(data, searchTerm = "") {
     img: "cloudy.png",
   };
 
-  const localTime = new Date((weatherData.dt + weatherData.timezone) * 1000);
+  const localTime = new Date((data.dt + data.timezone) * 1000);
   const options = { weekday: "long", hour: "2-digit", minute: "2-digit" };
   const localTimeString = localTime.toLocaleDateString("pt-BR", options);
 
@@ -121,8 +121,8 @@ function createWeatherCard(data, searchTerm = "") {
 
   const card = document.createElement("div");
   card.className = "weather-card";
-  card.dataset.temp = Math.round(weatherData.main.temp);
-  card.dataset.wind = Math.round(weatherData.wind.speed);
+  card.dataset.temp = Math.round(data.main.temp);
+  card.dataset.wind = Math.round(data.wind.speed);
   card.dataset.condition = condition.type;
 
   card.innerHTML = `
