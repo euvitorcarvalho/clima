@@ -142,62 +142,33 @@ function createWeatherCard(data, searchTerm = "") {
   return card;
 }
 
-async function searchWeather() {
-  const cityName = searchInput.value.trim();
-  if (cityName.length < 3 || searchedCities.includes(cityName)) {
-    return;
-  }
+function applyFilters() {
+  const tempValue = temperatureFilter.value;
+  const windValue = windFilter.value;
+  const conditionValue = conditionFilter.value;
 
-  try {
-    weatherCards.innerHTML = '<div class="loading-spinner"></div>';
-    const data = await fetchWeatherData(cityName);
+  document.querySelectorAll(".weather-card").forEach((card) => {
+    const temp = card.dataset.temp;
+    const wind = card.dataset.wind;
+    const condition = card.dataset.condition;
 
-    if (!data) {
-      weatherCards.innerHTML =
-        '<p class="error-message">Cidade não encontrada</p>';
-      return;
-    }
+    const tempMatch =
+      !tempValue ||
+      (tempValue === "hot" && temp > 30) ||
+      (tempValue === "mild" && temp >= 15 && temp <= 30) ||
+      (tempValue === "cold" && temp < 15);
 
-    searchedCities.push(cityName);
-    await renderWeatherCards();
-  } catch (error) {
-    console.error("Erro na busca:", error);
-    weatherCards.innerHTML = `<p class="error-message">Erro ao buscar dados: ${error.message}</p>`;
-  }
-}
+    const windMatch =
+      !windValue ||
+      (windValue === "hot" && wind > 10) ||
+      (windValue === "mild" && wind >= 10 && wind <= 20) ||
+      (windValue === "cold" && wind < 20);
 
-async function renderWeatherCards() {
-  if (searchedCities.length === 0) {
-    weatherCards.innerHTML =
-      "<p class='search-message'>Busque uma cidade para começar</p>";
-    return;
-  }
+    const conditionMatch = !conditionValue || condition === conditionValue;
 
-  try {
-    weatherCards.innerHTML = '<div class="loading-spinner"></div>';
-    let hasError = false;
-
-    weatherCards.innerHTML = "";
-
-    for (const city of searchedCities) {
-      const data = await fetchWeatherData(city);
-      if (data) {
-        const card = createWeatherCard(data);
-        weatherCards.appendChild(card);
-      } else {
-        hasError = true;
-      }
-    }
-
-    if (hasError) {
-      const errorElement = document.createElement("p");
-      errorElement.className = "error-message";
-      errorElement.textContent = "Algumas cidades não puderam ser carregadas";
-      weatherCards.appendChild(errorElement);
-    }
-  } catch (error) {
-    weatherCards.innerHTML = `<p class="error-message">Erro ao renderizar cartões: ${error.message}</p>`;
-  }
+    card.style.display =
+      tempMatch && windMatch && conditionMatch ? "block" : "none";
+  });
 }
 
 function debounce(func, wait) {
