@@ -150,7 +150,7 @@ function createWeatherCard(data, searchTerm = "") {
         ${highlightedName}
       </span>
       <span class="weather-temp">${Math.round(data.main.temp)}°C</span></h2>
-      <p class="weather-wind"> Vento: ${Math.round(data.wind.speed)} km/h</p>
+      <p class="weather-wind"> vento: ${Math.round(data.wind.speed)} km/h</p>
       <p class="weather-time">${localTimeString}</p>
       <p class="weather-condition">${data.weather[0].description}</p>
     </div>

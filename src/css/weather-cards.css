@@ -1,10 +1,12 @@
 .weather_cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
   width: 100%;
   margin-top: 2.1rem;
+  max-width: 180rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .flag {
@@ -15,10 +17,15 @@
 .weather-card {
   background-color: #24353e;
   border-radius: 2rem;
-  width: auto;
   padding: 3rem 5.2rem 2rem;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .weather-icon img {
@@ -42,30 +49,61 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  font-size: 4rem;
+  font-size: clamp(1.5rem, 4vw, 4rem);
 }
 
 .weather-temp {
   font-weight: 300;
 }
 
-@media (max-width: 850px) {
-  .weather-card {
-    width: 100%;
+.weather-wind,
+.weather-time,
+.weather-condition {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+}
+
+@media (min-width: 1800px) {
+  .weather-cards {
+    grid-template-columns: repeat(4, minmax(30rem, 1fr));
   }
 }
 
-@media (max-height: 788px) {
-  .weather-card {
-    height: 98%;
+/* Tablets */
+@media (max-width: 1200px) {
+  .weather-cards {
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   }
+
+  .city-name {
+    font-size: 3.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 850px) {
+  .weather-cards {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+
+  .weather-card {
+    width: 100%;
+    padding: 2rem 3rem;
+  }
+
+  .city-name {
+    font-size: 3rem;
+  }
+
   .weather-info p {
     margin: 1rem 0;
     font-size: 1.6rem;
   }
-  .city-name {
-    display: flex;
-    gap: 1rem;
-    font-size: 3rem;
+}
+
+/* Telas pequenas em modo retrato */
+@media (max-height: 788px) {
+  .weather-card {
+    height: 98%;
   }
 }
