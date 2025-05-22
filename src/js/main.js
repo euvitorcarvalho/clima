@@ -80,7 +80,7 @@ async function dynamicSearch(query) {
 async function fetchWeatherData(city) {
   try {
     const response = await fetch(
-      `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric&lang=pt_br`
+      `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric&lang=en_us`
     );
     if (!response.ok) throw new Error("Cidade não encontrada");
     return await response.json();
@@ -118,7 +118,7 @@ function createWeatherCard(data, searchTerm = "") {
 
   const localTime = new Date((data.dt + data.timezone) * 1000);
   const options = { weekday: "long", hour: "2-digit", minute: "2-digit" };
-  const localTimeString = localTime.toLocaleDateString("pt-BR", options);
+  const localTimeString = localTime.toLocaleDateString("en-US", options);
 
   const highlightedName = data.name.replace(
     new RegExp(searchTerm, "gi"),
@@ -138,11 +138,13 @@ function createWeatherCard(data, searchTerm = "") {
     <div class="weather-info">
       <h2 class="city-name">
       <span class="name-flag">
-        <img class="flag" src="https://flagsapi.com/${data.sys.country}/flat/64.png">
+        <img class="flag" src="https://flagsapi.com/${
+          data.sys.country
+        }/flat/64.png">
         ${highlightedName}
       </span>
       <span class="weather-temp">${Math.round(data.main.temp)}°C</span></h2>
-      <p class="weather-wind"> vento: ${Math.round(data.wind.speed)} km/h</p>
+      <p class="weather-wind"> wind: ${Math.round(data.wind.speed)} km/h</p>
       <p class="weather-time">${localTimeString}</p>
       <p class="weather-condition">${data.weather[0].description}</p>
     </div>
@@ -204,4 +206,4 @@ windFilter.addEventListener("change", applyFilters);
 conditionFilter.addEventListener("change", applyFilters);
 
 weatherCards.innerHTML =
-  "<p class='search-message'>Busque uma cidade para começar</p>";
+  "<p class='search-message'>Search for a city to get started</p>";
