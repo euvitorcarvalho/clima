@@ -11,7 +11,7 @@ header {
   padding: 5.1rem 12%;
   opacity: 1;
   visibility: visible;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .sticky {
