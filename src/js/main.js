@@ -24,57 +24,14 @@ const weatherConditions = {
   fog: { type: "cloudy", img: "cloudy.png" },
 };
 
-async function dynamicSearch(query) {
-  if (query.length < 3) {
-    weatherCards.innerHTML = "";
-    return;
-  }
-
-  currentSearchTerm = query;
-  weatherCards.classList.add("loading");
-
-  try {
-    const response = await fetch(
-      `${GEOCODING_URL}?q=${query}&limit=5&appid=${API_KEY}`
-    );
-
-    if (!response.ok) throw new Error("Erro na API");
-
-    const geoData = await response.json();
-
-    if (!Array.isArray(geoData)) {
-      throw new Error("Dados inválidos na API");
-    }
-
-    citiesData = filterUniqueCities(geoData);
-    weatherCards.innerHTML = "";
-
-    if (citiesData.length === 0) {
-      weatherCards.innerHTML = `<p class="error-message">Nenhuma cidade encontrada</p>`;
-      return;
-    }
-
-    for (const city of citiesData) {
-      const weatherData = await fetchWeatherData(
-        `${city.name}, ${city.country}`
-      );
-      if (weatherData) {
-        const card = createWeatherCard(weatherData, query);
-        weatherCards.appendChild(card);
-      }
-    }
-
-    applyFilters();
-  } catch (error) {
-    console.error("Erro na busca:", error);
-    weatherCards.innerHTML = `<p class="error-message">${
-      error.message === "Dados inválidos na API"
-        ? "Erro na API"
-        : "Erro ao buscar cidades"
-    }</p>`;
-  } finally {
-    weatherCards.classList.remove("loading");
-  }
+function debounce(func, wait) {
+  let timeout;
+  return function () {
+    const context = this,
+      args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
 }
 
 async function fetchWeatherData(city) {
@@ -182,14 +139,57 @@ function applyFilters() {
   });
 }
 
-function debounce(func, wait) {
-  let timeout;
-  return function () {
-    const context = this,
-      args = arguments;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
+async function dynamicSearch(query) {
+  if (query.length < 3) {
+    weatherCards.innerHTML = "";
+    return;
+  }
+
+  currentSearchTerm = query;
+  weatherCards.classList.add("loading");
+
+  try {
+    const response = await fetch(
+      `${GEOCODING_URL}?q=${query}&limit=5&appid=${API_KEY}`
+    );
+
+    if (!response.ok) throw new Error("Erro na API");
+
+    const geoData = await response.json();
+
+    if (!Array.isArray(geoData)) {
+      throw new Error("Dados inválidos na API");
+    }
+
+    citiesData = filterUniqueCities(geoData);
+    weatherCards.innerHTML = "";
+
+    if (citiesData.length === 0) {
+      weatherCards.innerHTML = `<p class="error-message">Nenhuma cidade encontrada</p>`;
+      return;
+    }
+
+    for (const city of citiesData) {
+      const weatherData = await fetchWeatherData(
+        `${city.name}, ${city.country}`
+      );
+      if (weatherData) {
+        const card = createWeatherCard(weatherData, query);
+        weatherCards.appendChild(card);
+      }
+    }
+
+    applyFilters();
+  } catch (error) {
+    console.error("Erro na busca:", error);
+    weatherCards.innerHTML = `<p class="error-message">${
+      error.message === "Dados inválidos na API"
+        ? "Erro na API"
+        : "Erro ao buscar cidades"
+    }</p>`;
+  } finally {
+    weatherCards.classList.remove("loading");
+  }
 }
 
 searchInput.addEventListener(
