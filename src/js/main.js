@@ -1,3 +1,7 @@
+import sunnyIcon from "../../assets/sunny.png";
+import cloudyIcon from "../../assets/cloudy.png";
+import rainyIcon from "../../assets/rainy.png";
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const GEOCODING_URL = "https://api.openweathermap.org/geo/1.0/direct";
@@ -12,16 +16,16 @@ let currentSearchTerm = "";
 let citiesData = [];
 
 const weatherConditions = {
-  clear: { type: "sunny", img: "sunny.png" },
-  clouds: { type: "cloudy", img: "cloudy.png" },
-  rain: { type: "rainy", img: "rainy.png" },
-  drizzle: { type: "rainy", img: "rainy.png" },
-  thunderstorm: { type: "rainy", img: "rainy.png" },
-  snow: { type: "rainy", img: "rainy.png" },
-  mist: { type: "cloudy", img: "cloudy.png" },
-  smoke: { type: "cloudy", img: "cloudy.png" },
-  haze: { type: "cloudy", img: "cloudy.png" },
-  fog: { type: "cloudy", img: "cloudy.png" },
+  clear: { type: "sunny", img: sunnyIcon },
+  clouds: { type: "cloudy", img: cloudyIcon },
+  rain: { type: "rainy", img: rainyIcon },
+  drizzle: { type: "rainy", img: rainyIcon },
+  thunderstorm: { type: "rainy", img: rainyIcon },
+  snow: { type: "rainy", img: rainyIcon },
+  mist: { type: "cloudy", img: cloudyIcon },
+  smoke: { type: "cloudy", img: cloudyIcon },
+  haze: { type: "cloudy", img: cloudyIcon },
+  fog: { type: "cloudy", img: cloudyIcon },
 };
 
 function debounce(func, wait) {
