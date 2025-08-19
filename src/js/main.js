@@ -94,7 +94,7 @@ function createWeatherCard(data, searchTerm = "") {
 
   card.innerHTML = `
     <div class="weather-icon">
-      <img class="weather-img" src="/assets/${condition.img}" alt="condition">
+      <img class="weather-img" src="${condition.img}" alt="condition">
     </div>
     <div class="weather-info">
       <h2 class="city-name">
