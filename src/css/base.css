@@ -29,10 +29,12 @@ main {
 }
 
 footer {
+  height: 5rem;
   display: flex;
   justify-content: center;
   bottom: 0;
-  margin: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 footer p {
@@ -83,7 +85,7 @@ footer p:hover {
 @media (max-width: 1322px) {
   body {
     height: 100vh;
-    background: #1b282e url(../../assets/background2.png) no-repeat center/cover;
+    background: #1b282e url(../../assets/background2.png) repeat center/cover;
   }
 }
 
