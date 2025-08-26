@@ -143,12 +143,6 @@ header {
 }
 
 @media (max-width: 850px) {
-  header {
-    background-image: url(../../assets/background.svg);
-    backdrop-filter: blur(10px);
-    background-color: #1b282e;
-  }
-
   .nav_actions .nav_btn {
     display: none;
   }
