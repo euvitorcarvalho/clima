@@ -6,10 +6,10 @@
 
 <p align="center">
   <a href="#-Projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-Deploy">Deploy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-Tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-Funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-Executar">Executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-Deploy">Deploy</a>
+  <a href="#-Executar">Executar</a>
 </p>
 
 <br>
@@ -18,9 +18,13 @@
   <img alt="projeto" src=".github/Animação.gif" width="100%">
 </p>
 
-## 💻 Projeto
+## ⚙️ Projeto
 
 Bem-vindo ao Clima! Esta é uma aplicação web interativa que permite aos usuários pesquisar o clima de cidades ao redor do mundo em tempo real. Os dados são consumidos da API <a href="https://openweathermap.org/api">OpenWeatherMap</a> e apresentados em cartões informativos e com um design agradável.
+
+## 🔖 Deploy
+
+Você pode visualizar e testar o projeto através [desse link](https://climacities.netlify.app/).
 
 ## 🚀 Tecnologias
 
@@ -43,7 +47,7 @@ Bem-vindo ao Clima! Esta é uma aplicação web interativa que permite aos usuá
 - **Design responsivo:** A aplicação se adapta perfeitamente a diferentes tamanhos de tela, de desktops a dispositivos móveis.
 - **Bandeiras dos países:** Identificação visual rápida do país da cidade pesquisada usando a <a href="https://flagsapi.com/">Country Flags Api</a>.
 
-## ⚙️ Executar
+## 💻 Executar
 
 Para executar o projeto localmente, siga os passos abaixo:
 
@@ -76,7 +80,3 @@ npm run dev
 ```
 
 A aplicação estará disponível na porta indicada pelo Vite.
-
-## 🔖 Deploy
-
-Você pode visualizar e testar o projeto através [desse link](https://climacities.netlify.app/).
