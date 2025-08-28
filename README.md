@@ -80,3 +80,10 @@ npm run dev
 ```
 
 A aplicação estará disponível na porta indicada pelo Vite.
+
+## 👨‍💻 Autor
+
+Feito com ❤️ por **Vitor Carvalho**
+
+- **LinkedIn:** [linkedin.com/in/euvitorcarvalho](https://www.linkedin.com/in/euvitorcarvalho/).
+- **Portfolio:** Em Breve.
